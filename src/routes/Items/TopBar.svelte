@@ -1,40 +1,41 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { searchQuery, searchResults, performSearch } from "../../lib/search";
+  import { browser } from "$app/environment";
   // @ts-ignore
   import { goto } from "$app/navigation";
   import { fade } from "svelte/transition";
 
-  let searchInput: HTMLInputElement;
+  let searchInput: HTMLInputElement | null = null;
   let isSearchFocused = false;
+  let currentSearch = "";
+  let isMac = false;
 
-  // Handle search input
-  function handleSearch(event: Event) {
-    const query = (event.target as HTMLInputElement).value;
-    searchQuery.set(query);
-    performSearch(query);
+  $: if (currentSearch !== undefined) {
+    searchQuery.set(currentSearch);
+    performSearch(currentSearch);
   }
 
-  // Handle keyboard shortcuts
-  function handleKeydown(event: KeyboardEvent) {
-    // Handle both Command+K and Control+K
+  function handleKeydown(event: KeyboardEvent): void {
     if (
       (event.key === "k" || event.key === "K") &&
       (event.metaKey || event.ctrlKey)
     ) {
       event.preventDefault();
-      searchInput?.focus();
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.focus();
+      }
     }
 
-    // Optional: Clear search on Escape
     if (event.key === "Escape" && isSearchFocused) {
-      searchInput?.blur();
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.blur();
+      }
       searchQuery.set("");
       searchResults.set([]);
     }
   }
 
-  // Handle result selection
   function handleResultClick(href: string) {
     searchQuery.set("");
     searchResults.set([]);
@@ -42,6 +43,7 @@
   }
 
   onMount(() => {
+    isMac = browser ? navigator.platform.includes("Mac") : false;
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
   });
@@ -69,8 +71,7 @@
             class="bg-gray-800/50 text-sm text-gray-300 rounded-md
             px-4 py-1.5 w-80 outline-none focus:ring-1 focus:ring-gray-700
             placeholder-gray-500 transition-all duration-300"
-            on:input={handleSearch}
-            bind:value={$searchQuery}
+            bind:value={currentSearch}
             on:focus={() => (isSearchFocused = true)}
             on:blur={() => setTimeout(() => (isSearchFocused = false), 200)}
           />
@@ -79,7 +80,7 @@
             items-center gap-1 rounded border bg-gray-900 px-1.5 font-mono text-xs text-gray-400
             border-gray-700"
           >
-            {navigator.platform.includes("Mac") ? "⌘" : "Ctrl"} + K
+            {isMac ? "⌘" : "Ctrl"} + K
           </kbd>
         </div>
 
@@ -109,7 +110,6 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <!-- svelte-ignore a11y_consider_explicit_label -->
         <a
           href="https://github.com/Plug-Studios"
           class="text-gray-400 hover:text-white"
@@ -119,10 +119,9 @@
               fill-rule="evenodd"
               d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
               clip-rule="evenodd"
-            ></path>
+            />
           </svg>
         </a>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
         <a
           href="https://discord.gg/SPqwJCzhuA"
           class="text-gray-400 hover:text-white"
