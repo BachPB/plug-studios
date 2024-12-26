@@ -1,31 +1,25 @@
-# Configuration Documentation
+# Kill Message Configuration
 
 ## Overview
 
-The Kill Message script configuration allows you to customize various aspects of the kill message display and behavior.
+This configuration file allows you to customize various aspects of the kill message system, including display settings and commands.
 
-## Configuration Options
+## Configuration Structure
 
 ### UI Settings
 
-| Option         | Type   | Default     | Description                                                          |
-| -------------- | ------ | ----------- | -------------------------------------------------------------------- |
-| `MessageTime`  | number | `2500`      | How long the kill message is displayed in milliseconds (2.5 seconds) |
-| `MessageColor` | string | `"#ff0000"` | The color of the kill message (red)                                  |
-
-### Position Settings
-
-| Option | Type   | Default | Description                                         |
-| ------ | ------ | ------- | --------------------------------------------------- |
-| `Top`  | string | `"10%"` | Default Y-position from the top of the screen       |
-| `left` | string | `"10%"` | Default X-position from the left side of the screen |
+| Option         | Type   | Default     | Description                                                                       |
+| -------------- | ------ | ----------- | --------------------------------------------------------------------------------- |
+| `MessageTime`  | number | `2500`      | Duration in milliseconds for how long the kill message is displayed (2.5 seconds) |
+| `MessageColor` | string | `"#ff00e0"` | The color of the kill message in hexadecimal format (pink)                        |
 
 ### General Settings
 
-| Option    | Type    | Default         | Description                                    |
-| --------- | ------- | --------------- | ---------------------------------------------- |
-| `Command` | string  | `"editkillmsg"` | The command used to open edit mode             |
-| `Debug`   | boolean | `false`         | Enables/disables debug messages in the console |
+| Option            | Type    | Default           | Description                                     |
+| ----------------- | ------- | ----------------- | ----------------------------------------------- |
+| `EditModeCommand` | string  | `"editkillmsg"`   | Command used to open edit mode                  |
+| `ToggleCommand`   | string  | `"togglekillmsg"` | Command used to toggle the kill message display |
+| `Debug`           | boolean | `true`            | Enables/disables debug messages in the console  |
 
 ## Example Configuration
 
@@ -34,18 +28,14 @@ Config = {}
 
 Config.Settings = {
     UI = {
-        MessageTime = 2500,    -- 2.5 seconds display time
-        MessageColor = "#ff0000",
-        DefaultPosition = {
-            Top = "10%",
-            left = "10%"
-        }
+        MessageTime = 2500,                 -- How long the kill message is displayed in milliseconds (2.5 seconds)
+        MessageColor = "#ff00e0",           -- The color of the kill message (pink)
+    },
+    General = {
+        EditModeCommand = 'editkillmsg',    -- The command used to open edit mode
+        ToggleCommand = 'togglekillmsg',    -- The command used to toggle the killed message
+        Debug = true                        -- Enables/disables debug messages in the console
     }
-}
-
-Config.General = {
-    Command = "editkillmsg",
-    Debug = false
 }
 ```
 
@@ -58,7 +48,7 @@ Config.General = {
 
 ## Notes
 
-- Position values must include the percentage symbol (%)
-- Colors must be in hexadecimal format
-- Time is in milliseconds
-- Debug mode should be disabled in production
+- Time is specified in milliseconds (1000ms = 1 second)
+- Colors must be in hexadecimal format (e.g., "#ff00e0")
+- Commands should not include the forward slash (/)
+- Debug mode should be disabled in production environments
