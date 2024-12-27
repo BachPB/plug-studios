@@ -10,10 +10,10 @@ Toggle the visibility of kill messages.
 
 ```lua
 -- Returns: boolean (new state)
-exports['kill-msg']:toggleKilledMessage()
+exports['plug-killmsg']:toggleKilledMessage()
 
 -- Example:
-local isVisible = exports['kill-msg']:toggleKilledMessage()
+local isVisible = exports['plug-killmsg']:toggleKilledMessage()
 print('Kill messages are now: ' .. (isVisible and 'visible' or 'hidden'))
 ```
 
@@ -22,10 +22,10 @@ Check if kill messages are currently visible.
 
 ```lua
 -- Returns: boolean
-exports['kill-msg']:isKilledMessageVisible()
+exports['plug-killmsg']:isKilledMessageVisible()
 
 -- Example:
-local isVisible = exports['kill-msg']:isKilledMessageVisible()
+local isVisible = exports['plug-killmsg']:isKilledMessageVisible()
 print('Kill messages are: ' .. (isVisible and 'visible' or 'hidden'))
 ```
 
