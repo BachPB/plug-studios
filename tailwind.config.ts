@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{html,js,svelte,ts,md}"],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       typography: {
         DEFAULT: {
           css: {
