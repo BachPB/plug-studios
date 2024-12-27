@@ -11,7 +11,7 @@ This configuration file allows you to customize various aspects of the kill mess
 | Option         | Type   | Default     | Description                                                                       |
 | -------------- | ------ | ----------- | --------------------------------------------------------------------------------- |
 | `MessageTime`  | number | `2500`      | Duration in milliseconds for how long the kill message is displayed (2.5 seconds) |
-| `MessageColor` | string | `"#ff00e0"` | The color of the kill message in hexadecimal format (pink)                        |
+| `MessageColor` | string | `"#ff0000"` | The color of the kill message in hexadecimal format (red)                         |
 
 ### General Settings
 
@@ -29,7 +29,7 @@ Config = {}
 Config.Settings = {
     UI = {
         MessageTime = 2500,                 -- How long the kill message is displayed in milliseconds (2.5 seconds)
-        MessageColor = "#ff00e0",           -- The color of the kill message (pink)
+        MessageColor = "#ff0000",           -- The color of the kill message (red)
     },
     General = {
         EditModeCommand = 'editkillmsg',    -- The command used to open edit mode
