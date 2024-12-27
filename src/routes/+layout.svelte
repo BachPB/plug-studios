@@ -8,7 +8,7 @@
   <TopBar />
   <SideBar />
   <main
-    class="lg:ml-64 p-4 sm:p-6 lg:p-8 overflow-y-auto max-h-[calc(100vh-4rem)]
+    class="lg:ml-40 p-4 sm:p-6 lg:px-48 lg:py-12 overflow-y-auto max-h-[calc(100vh-4rem)]
     w-full"
   >
     <div
