@@ -60,10 +60,6 @@ The following exports are available for external resource integration:
 ### Example Usage
 
 ```lua
--- Open Aimlab UI
-RegisterCommand('aimlab', function()
-    exports['plug-aimlab']:OpenUI()
-end)
 
 -- Get current training statistics
 local timeLeft = exports['plug-aimlab']:getAimlabTimeLeft()
