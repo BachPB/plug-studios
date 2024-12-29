@@ -35,4 +35,18 @@ export const navItems = writable<any>([
       },
     ],
   },
+  {
+    label: "Aimlab",
+    isOpen: false,
+    children: [
+      {
+        label: "Exports",
+        href: "/scripts/aimlab/exports",
+      },
+      {
+        label: "Config",
+        href: "/scripts/aimlab/config",
+      },
+    ],
+  },
 ]);
