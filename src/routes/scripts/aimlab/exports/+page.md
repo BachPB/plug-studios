@@ -19,10 +19,10 @@ end)
 ```
 
 ### Leave Aimlab
-Leave the Aimlab UI.
+Leave the Aimlab.
 
 ```lua
--- Leaves the Aimlab UI
+-- Leaves the Aimlab
 exports['plug-aimlab']:leaveAimlab()
 
 -- Example:
